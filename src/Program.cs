@@ -6,7 +6,6 @@ namespace CubicSplineInterpolation
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
             Matrix matrix = new Matrix(3);
             Console.WriteLine(matrix);
             matrix[0, 0] = 1;
@@ -15,7 +14,7 @@ namespace CubicSplineInterpolation
             Console.WriteLine(matrix);
             matrix.SwapRows(0, 1);
             Console.WriteLine(matrix);
-            matrix[2, 2]++;
+            matrix[2, 2] = 0 ;
             Console.WriteLine(matrix);
 
 
@@ -33,7 +32,7 @@ namespace CubicSplineInterpolation
 
             matrix.PerformGaussianElimination(vector);
 
-            Console.WriteLine(matrix);
+            Console.WriteLine(vector[0] + " " + vector[1] + " " + vector[2]);
 
             
 
