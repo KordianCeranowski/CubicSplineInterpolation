@@ -22,7 +22,7 @@ namespace CubicSplineInterpolation
 
         public bool ContainsField(int row, int col)
         {
-            return !fields.ContainsKey(Tuple.Create(row, col));
+            return fields.ContainsKey(Tuple.Create(row, col));
         }
 
         private bool IsOutOfBounds(int row, int col)
@@ -35,7 +35,6 @@ namespace CubicSplineInterpolation
             var coordinates = Tuple.Create(row, col);
             if (!fields.ContainsKey(coordinates))
             {
-                // if argument is out of bounds
                 if (IsOutOfBounds(row, col))
                 {
                     throw new System.IndexOutOfRangeException();
@@ -76,8 +75,7 @@ namespace CubicSplineInterpolation
                 return;
             }
         }
-
-        // longer but more effective approach
+        
         // does not swap zeroes
         public void SwapRows(int rowOne, int rowTwo)
         {
@@ -103,14 +101,15 @@ namespace CubicSplineInterpolation
                 {
                     this[rowTwo, col] = this[rowOne, col];
                     this[rowOne, col] = 0;
+                    continue;
                 }
                 else // rowTwo exists and rowOne does not exist
                 {
                     this[rowOne, col] = this[rowTwo, col];
                     this[rowTwo, col] = 0;
+                    continue;
                 }
             }
         }
-
     }
 }
