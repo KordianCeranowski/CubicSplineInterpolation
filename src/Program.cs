@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using static CubicSplineInterpolation.CSI;
 
 namespace CubicSplineInterpolation
 {
@@ -34,7 +36,19 @@ namespace CubicSplineInterpolation
 
             Console.WriteLine(vector[0] + " " + vector[1] + " " + vector[2]);
 
-            
+
+            List<Point> list = new List<Point>();
+            list.Add(new Point(1, 1));
+            list.Add(new Point(2, 5));
+            list.Add(new Point(3, 4));
+
+
+            CSI csi = new CSI(list);
+
+            csi.Run();
+
+            Console.WriteLine(csi.matrix);
+
 
         }
     }
