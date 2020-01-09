@@ -1,0 +1,11 @@
+C:\Users\Kordian\source\repos\CubicSplineInterpolation\bin\Debug\netcoreapp3.0\CubicSplineInterpolation.exe
+C:\Users\Kordian\source\repos\CubicSplineInterpolation\bin\Debug\netcoreapp3.0\CubicSplineInterpolation.deps.json
+C:\Users\Kordian\source\repos\CubicSplineInterpolation\bin\Debug\netcoreapp3.0\CubicSplineInterpolation.runtimeconfig.json
+C:\Users\Kordian\source\repos\CubicSplineInterpolation\bin\Debug\netcoreapp3.0\CubicSplineInterpolation.runtimeconfig.dev.json
+C:\Users\Kordian\source\repos\CubicSplineInterpolation\bin\Debug\netcoreapp3.0\CubicSplineInterpolation.dll
+C:\Users\Kordian\source\repos\CubicSplineInterpolation\bin\Debug\netcoreapp3.0\CubicSplineInterpolation.pdb
+C:\Users\Kordian\source\repos\CubicSplineInterpolation\obj\Debug\netcoreapp3.0\CubicSplineInterpolation.csprojAssemblyReference.cache
+C:\Users\Kordian\source\repos\CubicSplineInterpolation\obj\Debug\netcoreapp3.0\CubicSplineInterpolation.AssemblyInfoInputs.cache
+C:\Users\Kordian\source\repos\CubicSplineInterpolation\obj\Debug\netcoreapp3.0\CubicSplineInterpolation.AssemblyInfo.cs
+C:\Users\Kordian\source\repos\CubicSplineInterpolation\obj\Debug\netcoreapp3.0\CubicSplineInterpolation.dll
+C:\Users\Kordian\source\repos\CubicSplineInterpolation\obj\Debug\netcoreapp3.0\CubicSplineInterpolation.pdb

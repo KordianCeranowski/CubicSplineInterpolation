@@ -3,10 +3,26 @@ using System.Collections.Generic;
 
 namespace CubicSplineInterpolation
 {
-    internal class Matrix
+    public class Matrix
     {
-        public Dictionary<Tuple<int, int>, double> fields;
+        private Dictionary<Tuple<int, int>, double> fields;
         public int size;
+
+        public override string ToString()
+        {
+            string matrix = "";
+
+            for (int row = 0; row < size; row++)
+            {
+                for (int col = 0; col < size; col++)
+                {
+                    matrix += this[row, col] + " ";
+                }
+                matrix += "\n";
+            }
+
+            return matrix;
+        }
 
         public Matrix(int size)
         {
@@ -20,7 +36,7 @@ namespace CubicSplineInterpolation
             set => SetValue(row, col, value);
         }
 
-        public bool ContainsField(int row, int col)
+        private bool ContainsField(int row, int col)
         {
             return fields.ContainsKey(Tuple.Create(row, col));
         }
