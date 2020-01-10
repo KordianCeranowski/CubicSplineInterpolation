@@ -45,9 +45,9 @@ namespace CubicSplineInterpolation
             InsertThirdConditionEquasions();
             InsertFourthConditionEquasions();
 
-            matrix.OrderRows();
+            matrix.OrderRows(ref vector);
 
-            matrix.PerformGaussianElimination(vector);
+            matrix.GaussianElimination(vector);
         }
 
         //do zrefaktorowania
