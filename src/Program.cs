@@ -49,6 +49,17 @@ namespace CubicSplineInterpolation
 
             Console.WriteLine(csi.matrix);
 
+            Console.WriteLine(
+                csi.vector[0] + " " +
+                csi.vector[1] + " " +
+                csi.vector[2] + " " +
+                csi.vector[3] + " " +
+                csi.vector[4] + " " +
+                csi.vector[5] + " " +
+                csi.vector[6] + " " +
+                csi.vector[7] + " "
+                );
+
 
         }
     }

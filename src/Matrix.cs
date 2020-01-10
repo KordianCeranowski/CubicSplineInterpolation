@@ -195,7 +195,7 @@ namespace CubicSplineInterpolation
 
 
         // Operacja odwrotna po Gaussie
-        public void PerformBackwardsOperation(double[] vector)
+        private void PerformBackwardsOperation(double[] vector)
         {
             double q; // mnożnik dla danego miejsca w wektorze, tj dla 3 pozycji w wektorze to będzie punkt [3,3] w macierzy
             double x; // wartość w danym miejscu w wektorze
