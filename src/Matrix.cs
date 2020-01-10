@@ -6,17 +6,25 @@ namespace CubicSplineInterpolation
     public class Matrix
     {
         private Dictionary<Tuple<int, int>, double> fields;
-        public int size;
+        public readonly int size;
 
         public override string ToString()
         {
             string matrix = "";
+            int MAX_SPACES = 4;
 
             for (int row = 0; row < size; row++)
             {
                 for (int col = 0; col < size; col++)
                 {
-                    matrix += this[row, col] + " ";
+                    double val = this[row, col];
+                    String valString = val.ToString();
+                    matrix += valString;
+                    int spaces = MAX_SPACES - valString.Length;
+                    for (int i = 0; i < spaces; i++)
+                    {
+                        matrix += " ";
+                    }
                 }
                 matrix += "\n";
             }
@@ -213,6 +221,69 @@ namespace CubicSplineInterpolation
                 d = this[row, row];
                 vector[row] /= d;
             }
+        }
+
+
+        // Porządkowanie rzędów aby na przekątnych nie było zer
+        public void OrderRows()
+        {
+            var newFields = new Dictionary<Tuple<int, int>, double>();
+
+            int equasionsFromFirstCondition = size / 2;
+            int equasionsFromSecondCondition = size / CSI.VARIABLES_IN_POLYNOMIAL - 1;
+            int equasionsFromThirdCondition = equasionsFromSecondCondition;
+
+            foreach (var field in fields)
+            {
+                int newRow = 0;
+                int currentRow = field.Key.Item1;
+
+                // Zapamiętać: Dictionary zapamiętuje kolejność wpisów. 
+
+                // First condition
+                if (currentRow < equasionsFromFirstCondition)
+                {
+                    if (currentRow % 2 == 0)
+                    {
+                        newRow = currentRow * 2 + 2;
+                    }
+                    else
+                    {
+                        newRow = currentRow * 2 + 1;
+                    }
+                }
+                // Second condition
+                else if (currentRow < equasionsFromFirstCondition + equasionsFromSecondCondition)
+                {
+                    newRow = (currentRow - equasionsFromFirstCondition + 1) * CSI.VARIABLES_IN_POLYNOMIAL;
+                }
+                // Third condition
+                else if (currentRow < equasionsFromFirstCondition + equasionsFromSecondCondition + equasionsFromThirdCondition)
+                {
+                    newRow = (currentRow - equasionsFromFirstCondition - equasionsFromSecondCondition) * CSI.VARIABLES_IN_POLYNOMIAL + 1;
+                }
+                // Fourth condition
+                else if (currentRow == size - 2)
+                {
+                    newRow = 0;
+                }
+                else if (currentRow == size - 1)
+                {
+                    newRow = size - 3;
+                }
+                else
+                {
+                    throw new System.IndexOutOfRangeException();
+                }
+
+                
+                //if(!newFields.ContainsKey(Tuple.Create(newRow, field.Key.Item2)))
+                    newFields.Add(Tuple.Create(newRow, field.Key.Item2), field.Value);
+
+            }
+
+            this.fields = newFields;
+
         }
 
     }

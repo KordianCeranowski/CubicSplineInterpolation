@@ -18,7 +18,7 @@ namespace CubicSplineInterpolation
             }
         }
 
-        readonly int VARIABLES_IN_POLYNOMIAL = 4;
+        readonly public static int VARIABLES_IN_POLYNOMIAL = 4;
         readonly int countOfPolynomials;
 
         public List<Point> points;
@@ -44,6 +44,8 @@ namespace CubicSplineInterpolation
             InsertSecondConditionEquasions();
             InsertThirdConditionEquasions();
             InsertFourthConditionEquasions();
+
+            matrix.OrderRows();
 
             matrix.PerformGaussianElimination(vector);
         }
@@ -140,5 +142,21 @@ namespace CubicSplineInterpolation
 
             vector[currentRow] = 0;
         }
+
+        public void printVector()
+        {
+            string vectorString = "";
+            foreach (var value in vector)
+            {
+                vectorString += value + " ";
+            }
+            Console.WriteLine(vectorString);
+        }
+
+        public void printMatrix()
+        {
+            Console.WriteLine(matrix);
+        }
+
     }
 }
