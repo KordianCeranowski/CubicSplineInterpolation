@@ -70,7 +70,7 @@ function plotElevation(elevations, status) {
     var diffOverall = Math.sqrt(Math.pow(diffLat, 2) + Math.pow(diffLng, 2));
     
     totalDistance += diffOverall;
-    pyszne.innerHTML += totalDistance * KM_IN_DEGREE + ','
+    pyszne.innerHTML += totalDistance * KM_IN_DEGREE + ';'
    
     pyszne.innerHTML += elevations[i].elevation
     pyszne.innerHTML += '<br/>'
