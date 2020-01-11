@@ -6,24 +6,14 @@ namespace CubicSplineInterpolation
 {
     class CSI
     {
-        public class Point
-        {
-            readonly public double x;
-            readonly public double y;
 
-            public Point(double x, double y)
-            {
-                this.x = x;
-                this.y = y;
-            }
-        }
 
         readonly public static int VARIABLES_IN_POLYNOMIAL = 4;
         readonly int countOfPolynomials;
 
         public List<Point> points;
         public Matrix matrix;
-        public double[] vector;
+        public Vector vector;
 
         int currentRow;
 
@@ -35,20 +25,26 @@ namespace CubicSplineInterpolation
             this.points = points;
 
             this.matrix = new Matrix(VARIABLES_IN_POLYNOMIAL * countOfPolynomials);
-            this.vector = new double[VARIABLES_IN_POLYNOMIAL * countOfPolynomials];
-    }
+            this.vector = new Vector(VARIABLES_IN_POLYNOMIAL * countOfPolynomials);
 
-        public void Run()
-        {
             InsertFirstConditionEquasions();
             InsertSecondConditionEquasions();
             InsertThirdConditionEquasions();
             InsertFourthConditionEquasions();
 
             matrix.OrderRows(ref vector);
+        }
 
+        public void RunGauss()
+        {
             matrix.GaussianElimination(vector);
         }
+
+        public void RunGaussSeidel()
+        {
+            matrix.GaussSeidel(ref vector);
+        }
+
 
         //do zrefaktorowania
         private void InsertFirstConditionEquasions()
@@ -141,21 +137,6 @@ namespace CubicSplineInterpolation
             matrix[currentRow, currentPolynomial * VARIABLES_IN_POLYNOMIAL + 1] = 2 * Math.Pow(points[currentPoint].x, 0);
 
             vector[currentRow] = 0;
-        }
-
-        public void printVector()
-        {
-            string vectorString = "";
-            foreach (var value in vector)
-            {
-                vectorString += value + " ";
-            }
-            Console.WriteLine(vectorString);
-        }
-
-        public void printMatrix()
-        {
-            Console.WriteLine(matrix);
         }
 
     }

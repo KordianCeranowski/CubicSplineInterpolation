@@ -6,11 +6,11 @@ namespace CubicSplineInterpolation
     public class Matrix
     {
         private Dictionary<Tuple<int, int>, double> fields;
-        private readonly int size;
+        public readonly int size;
 
         public override string ToString()
         {
-            string matrix = "";
+            string matrixString = "";
             int MAX_SPACES = 4;
 
             for (int row = 0; row < size; row++)
@@ -19,17 +19,17 @@ namespace CubicSplineInterpolation
                 {
                     double val = this[row, col];
                     String valString = val.ToString();
-                    matrix += valString;
+                    matrixString += valString;
                     int spaces = MAX_SPACES - valString.Length;
                     for (int i = 0; i < spaces; i++)
                     {
-                        matrix += " ";
+                        matrixString += " ";
                     }
                 }
-                matrix += "\n";
+                matrixString += "\n";
             }
 
-            return matrix;
+            return matrixString;
         }
 
         public Matrix(int size)
@@ -101,10 +101,10 @@ namespace CubicSplineInterpolation
         }
 
         // Porządkowanie rzędów aby na przekątnych nie było zer
-        public void OrderRows(ref double[] vector)
+        public void OrderRows(ref Vector vector)
         {
             var newFields = new Dictionary<Tuple<int, int>, double>();
-            var newVector = new double[vector.Length];
+            var newVector = new Vector(vector.Length);
 
             int equasionsFromFirstCondition = size / 2;
             int equasionsFromSecondCondition = size / CSI.VARIABLES_IN_POLYNOMIAL - 1;
@@ -199,7 +199,7 @@ namespace CubicSplineInterpolation
             }
         }
 
-        public void GaussianElimination(double[] vector)
+        public void GaussianElimination(Vector vector)
         {
             if (vector.Length != this.size)
             {
@@ -230,7 +230,7 @@ namespace CubicSplineInterpolation
 
         }
 
-        private void PartialChoice(int row, int column, double[] vector)
+        private void PartialChoice(int row, int column, Vector vector)
         {
             int rowToSwap = FindMaxInRows(row, column);
             SwapRows(row, rowToSwap);
@@ -262,7 +262,7 @@ namespace CubicSplineInterpolation
             return rowOfMaxValue;
         }
 
-        private void BackwardsOperation(double[] vector)
+        private void BackwardsOperation(Vector vector)
         {
             double q; // mnożnik dla danego miejsca w wektorze, tj dla 3 pozycji w wektorze to będzie punkt [3,3] w macierzy
             double x; // wartość w danym miejscu w wektorze
@@ -283,6 +283,64 @@ namespace CubicSplineInterpolation
         }
 
 
+        public void GaussSeidel(ref Vector vector)
+        {
+            var lastVector = new Vector(vector.Length);
+            var currentVector = new Vector(vector.Length);
+
+            double difference = 1;
+
+            while (difference > 0.001)
+            {
+                for (int i = 0; i < currentVector.Length; i++)
+                {
+                    double sum = 0;
+
+                    sum += vector[i];
+
+                    for (int j = 0; j < size; j++)
+                    {
+                        if (i != j)
+                        {
+                            sum -= this[i, j] * lastVector[j];
+                        }
+                    }
+
+                    var dividor = this[i, i];
+                    currentVector[i] = sum / dividor;
+
+                }
+
+                difference = CountDifference(currentVector, lastVector);
+
+                Console.WriteLine(currentVector); ;
+                Console.WriteLine(lastVector);
+                Console.WriteLine("");
+
+                for (int i = 0; i < currentVector.Length; i++)
+                {
+                    lastVector[i] = currentVector[i];
+                }
+
+            }
+
+            vector = currentVector;
+
+        }
+
+        private double CountDifference(Vector current, Vector last)
+        {
+            double sum = 0;
+
+            for (int i = 0; i < current.Length; i++)
+            {
+                sum += Math.Abs(current[i] - last[i]);
+            }
+
+            Console.WriteLine("XD: " + sum);
+
+            return sum;
+        }
 
     }
 }
