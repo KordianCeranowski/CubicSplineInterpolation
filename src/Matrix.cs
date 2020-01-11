@@ -199,64 +199,7 @@ namespace CubicSplineInterpolation
             }
         }
 
-        public void GaussSeidel(ref Vector vector)
-        {
-            var lastVector = new Vector(vector.Length);
-            var currentVector = new Vector(vector.Length);
 
-            double difference = 1;
-
-            while (difference > 0.001)
-            {
-                for (int i = 0; i < currentVector.Length; i++)
-                {
-                    double sum = 0;
-
-                    sum += vector[i];
-
-                    for (int j = 0; j < size; j++)
-                    {
-                        if (i != j)
-                        {
-                            sum -= this[i, j] * lastVector[j];
-                        }
-                    }
-
-                    var dividor = this[i, i];
-                    currentVector[i] = sum / dividor;
-
-                }
-
-                difference = CountDifference(currentVector, lastVector);
-
-                Console.WriteLine(currentVector); ;
-                Console.WriteLine(lastVector);
-                Console.WriteLine("");
-
-                for (int i = 0; i < currentVector.Length; i++)
-                {
-                    lastVector[i] = currentVector[i];
-                }
-
-            }
-
-            vector = currentVector;
-
-        }
-
-        private double CountDifference(Vector current, Vector last)
-        {
-            double sum = 0;
-
-            for (int i = 0; i < current.Length; i++)
-            {
-                sum += Math.Abs(current[i] - last[i]);
-            }
-
-            Console.WriteLine("XD: " + sum);
-
-            return sum;
-        }
 
     }
 }

@@ -38,19 +38,27 @@ namespace CubicSplineInterpolation
             this[rowTwo] = temp;
         }
 
+        public void CopyValues(Vector other)
+        {
+            for (int i = 0; i < other.Length; i++)
+            {
+                this[i] = other[i];
+            }
+        }
+
         public override string ToString()
         {
             string vectorString = "[";
             foreach (var value in this.fields)
             {
-                vectorString += value + ", ";
+                vectorString += Math.Round(value, 3) + ", ";
             }
             vectorString += "\b\b]\n";
 
             return vectorString;
         }
 
-        // Paste into https://www.desmos.com/calculator
+        // Paste output into https://www.desmos.com/calculator
         public string AsPolynomials()
         {
             string polynomials = "";

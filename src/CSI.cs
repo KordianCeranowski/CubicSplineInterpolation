@@ -6,8 +6,6 @@ namespace CubicSplineInterpolation
 {
     class CSI
     {
-
-
         readonly public static int VARIABLES_IN_POLYNOMIAL = 4;
         readonly int countOfPolynomials;
 
@@ -42,9 +40,13 @@ namespace CubicSplineInterpolation
 
         public void RunGaussSeidel()
         {
-            matrix.GaussSeidel(ref vector);
+            GaussSeidel.GaussSeidelProcedure(matrix, vector);
         }
 
+        public void RunJacobi()
+        {
+            Console.WriteLine("todo");
+        }
 
         //do zrefaktorowania
         private void InsertFirstConditionEquasions()
