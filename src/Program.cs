@@ -20,7 +20,11 @@ namespace CubicSplineInterpolation
                 new Point(7, 9)*/
             };
 
-            CSI csi = new CSI(list);
+            var generatedList = FunctionValuesGenerator.Generate(10, -50, 50);
+
+            CSI csi = new CSI(generatedList);
+
+            //CSI csi = new CSI(list);
 
             //Console.WriteLine(csi.matrix);
             //Console.WriteLine(csi.vector);
