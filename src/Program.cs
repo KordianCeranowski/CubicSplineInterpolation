@@ -20,20 +20,15 @@ namespace CubicSplineInterpolation
                 new Point(8, 9)
             };
 
+            var test = CSVtoPointList.Run(40);
+            test = CSVtoPointList.StretchDiagonaly(test, 10);
 
-
-            //var generatedList = FunctionValuesGenerator.Generate(5, -5, 5);
-
-            //CSI csi = new CSI(generatedList);
-
-            CSI csi = new CSI(list);
+            CSI csi = new CSI(test);
             //csi.RunGaussSeidel();
 
             csi.RunGauss();
 
             csi.GetReport();
-
-            
         }
     }
 }

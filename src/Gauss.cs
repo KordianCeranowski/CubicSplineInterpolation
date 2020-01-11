@@ -6,7 +6,7 @@ namespace CubicSplineInterpolation
 {
     class Gauss
     {
-        private static readonly bool OUTPUT_ON = false;
+        private static readonly bool OUTPUT_ON = true;
 
         public static void GaussianElimination(Matrix matrix, Vector vector)
         {
