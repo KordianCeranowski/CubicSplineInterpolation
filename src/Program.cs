@@ -10,11 +10,11 @@ namespace CubicSplineInterpolation
         {
             List<Point> list = new List<Point>
             {
-/*                new Point(1,1),
+                /*new Point(1,1),
                 new Point(2,5),
-                new Point(3,4)
-*/
-               new Point(1, 1),
+                new Point(3,4)*/
+
+                new Point(1, 1),
                 new Point(3, 6),
                 new Point(5, 4),
                 new Point(7, 9)

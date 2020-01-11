@@ -31,6 +31,13 @@ namespace CubicSplineInterpolation
             fields[row] = value;
         }
 
+        public void SwapRows(int rowOne, int rowTwo)
+        {
+            double temp = this[rowOne];
+            this[rowOne] = this[rowTwo];
+            this[rowTwo] = temp;
+        }
+
         public override string ToString()
         {
             string vectorString = "[";
@@ -43,6 +50,7 @@ namespace CubicSplineInterpolation
             return vectorString;
         }
 
+        // Paste into https://www.desmos.com/calculator
         public string AsPolynomials()
         {
             string polynomials = "";

@@ -37,7 +37,7 @@ namespace CubicSplineInterpolation
 
         public void RunGauss()
         {
-            matrix.GaussianElimination(vector);
+            Gauss.GaussianElimination(matrix, vector);
         }
 
         public void RunGaussSeidel()

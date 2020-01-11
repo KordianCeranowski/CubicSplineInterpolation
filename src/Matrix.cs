@@ -163,8 +163,8 @@ namespace CubicSplineInterpolation
 
         }
 
-        // does not swap zeroes
-        private void SwapRows(int rowOne, int rowTwo)
+        // Does not swap zeroes
+        public void SwapRows(int rowOne, int rowTwo)
         {
             for (int col = 0; col < size; col++)
             {
@@ -198,90 +198,6 @@ namespace CubicSplineInterpolation
                 }
             }
         }
-
-        public void GaussianElimination(Vector vector)
-        {
-            if (vector.Length != this.size)
-            {
-                throw new System.Exception("Wprowadzono wektor o złym rozmiarze");
-            }
-
-            for (int i = 0; i < size; i++)
-            {
-                PartialChoice(i, i, vector);
-
-                for (int j = i + 1; j < size; j++)
-                {
-                    double zerowany = this[j, i];
-                    double zerujacy = this[i, i];
-                    double multiplier = zerowany / zerujacy;
-                    for (int col = i; col < size; col++)
-                    {
-                        zerujacy = this[i, col];
-                        this[j, col] -= zerujacy * multiplier;
-                    }
-
-                    vector[j] -= vector[i] * multiplier;
-
-                }
-            }
-
-            BackwardsOperation(vector);
-
-        }
-
-        private void PartialChoice(int row, int column, Vector vector)
-        {
-            int rowToSwap = FindMaxInRows(row, column);
-            SwapRows(row, rowToSwap);
-
-            //swaping rows in vector;
-            double temp = vector[row];
-            vector[row] = vector[rowToSwap];
-            vector[rowToSwap] = temp;
-
-        }
-
-        private int FindMaxInRows(int startRow, int column)
-        {
-            double maxValue = this[startRow, column];
-            maxValue = Math.Abs(maxValue);
-            int rowOfMaxValue = startRow;
-
-            for (int row = startRow + 1; row < size; row++)
-            {
-                double var = this[row, column];
-                var = Math.Abs(var);
-                if (var > maxValue)
-                {
-                    maxValue = var;
-                    rowOfMaxValue = row;
-                }
-            }
-
-            return rowOfMaxValue;
-        }
-
-        private void BackwardsOperation(Vector vector)
-        {
-            double q; // mnożnik dla danego miejsca w wektorze, tj dla 3 pozycji w wektorze to będzie punkt [3,3] w macierzy
-            double x; // wartość w danym miejscu w wektorze
-            double d; // mnożnik dla aktualnie wyliczanego miejsca w wektorze
-
-            for (int row = size - 1; row >= 0; row--)
-            {
-                for (int i = row + 1; i < size; i++)
-                {
-                    q = this[row, i];
-                    x = vector[i];
-                    vector[row] -= q * x;
-                }
-
-                d = this[row, row];
-                vector[row] /= d;
-            }
-        }
-
 
         public void GaussSeidel(ref Vector vector)
         {
