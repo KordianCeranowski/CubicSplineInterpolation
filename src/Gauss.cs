@@ -6,6 +6,8 @@ namespace CubicSplineInterpolation
 {
     class Gauss
     {
+        private static readonly bool OUTPUT_ON = false;
+
         public static void GaussianElimination(Matrix matrix, Vector vector)
         {
             if (vector.Length != matrix.size)
@@ -15,9 +17,11 @@ namespace CubicSplineInterpolation
 
             for (int i = 0; i < matrix.size; i++)
             {
-
-                Console.Write($"\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\bPostęp Gaussa: {Math.Round(i*100d/matrix.size, 2)}%");
-
+                if (OUTPUT_ON)
+                {
+                    Console.Write($"\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\bPostęp Gaussa: {Math.Round(i * 100d / matrix.size, 2)}%");
+                }
+                    
                 PartialChoice(matrix, i, i, vector);
 
                 for (int j = i + 1; j < matrix.size; j++)

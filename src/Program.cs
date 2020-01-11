@@ -10,29 +10,30 @@ namespace CubicSplineInterpolation
         {
             List<Point> list = new List<Point>
             {
-                new Point(1,1),
-                new Point(2,5),
-                new Point(3,4)
+                new Point(1,2),
+                new Point(2,3),
+                new Point(3,5),
 
-                /*new Point(1, 1),
-                new Point(3, 6),
-                new Point(5, 4),
-                new Point(7, 9)*/
+                new Point(4, 1),
+                new Point(5, 6),
+                new Point(7, 4),
+                new Point(8, 9)
             };
 
-            var generatedList = FunctionValuesGenerator.Generate(10, -50, 50);
 
-            CSI csi = new CSI(generatedList);
 
-            //CSI csi = new CSI(list);
+            //var generatedList = FunctionValuesGenerator.Generate(5, -5, 5);
 
-            //Console.WriteLine(csi.matrix);
-            //Console.WriteLine(csi.vector);
+            //CSI csi = new CSI(generatedList);
 
+            CSI csi = new CSI(list);
             //csi.RunGaussSeidel();
+
             csi.RunGauss();
 
-            Console.WriteLine(csi.vector.AsPolynomials());
+            csi.GetReport();
+
+            
         }
     }
 }

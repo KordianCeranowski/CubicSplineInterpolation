@@ -34,14 +34,10 @@ namespace CubicSplineInterpolation
                 }
 
                 difference = CountDifference(currentVector, lastVector);
-
-
-
-                lastVector.CopyValues(currentVector);
-                
+                lastVector.CopyValuesFrom(currentVector);
             }
 
-            vector.CopyValues(currentVector);
+            vector.CopyValuesFrom(currentVector);
 
         }
 

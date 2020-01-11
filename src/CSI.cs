@@ -141,5 +141,14 @@ namespace CubicSplineInterpolation
             vector[currentRow] = 0;
         }
 
+        // Paste output into https://www.desmos.com/calculator
+        public void GetReport()
+        {
+            foreach (var point in points)
+            {
+                Console.WriteLine(point);
+            }
+            Console.WriteLine(vector.AsPolynomials());
+        }
     }
 }

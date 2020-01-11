@@ -38,7 +38,7 @@ namespace CubicSplineInterpolation
             this[rowTwo] = temp;
         }
 
-        public void CopyValues(Vector other)
+        public void CopyValuesFrom(Vector other)
         {
             for (int i = 0; i < other.Length; i++)
             {
