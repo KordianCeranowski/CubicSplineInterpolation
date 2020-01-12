@@ -31,6 +31,47 @@ namespace CubicSplineInterpolation
             fields[row] = value;
         }
 
+        public static Vector operator +(Vector a) => a;
+
+        public static Vector operator -(Vector a) 
+        {
+            for (int i = 0; i < a.Length; i++)
+            {
+                a[i] = -a[i];
+            }
+            return a;
+        }
+
+        public static Vector operator +(Vector a, Vector b)
+        {
+            if (a.Length != b.Length)
+            {
+                throw new System.ArgumentException("Próba dodania wektorów o różnych rozmiarach");
+            }
+            Vector c = new Vector(a.Length);
+            for (int i = 0; i < a.Length; i++)
+            {
+                c[i] = a[i] + b[i];
+            }
+            return c;
+        }
+
+        public static Vector operator -(Vector a, Vector b)
+        => a + (-b);
+
+        public void Abs()
+        {
+            for (int i = 0; i < Length; i++)
+            {
+                this[i] = Math.Abs(this[i]);
+            }
+        }
+
+        public double getNorm
+        {
+
+        }
+
         public void SwapRows(int rowOne, int rowTwo)
         {
             double temp = this[rowOne];
@@ -65,14 +106,20 @@ namespace CubicSplineInterpolation
 
             for (int i = 0; i < fields.Length; i += CSI.VARIABLES_IN_POLYNOMIAL)
             {
+                // do Plotly
+                polynomials += "y = ";
 
                 for (int j = 0; j < CSI.VARIABLES_IN_POLYNOMIAL; j++)
                 {
-                    if (fields[i + j] >= 0)
+                    if (fields[i + j] >= 0 && j != 0)
                         polynomials += " + ";
-                    else
+                    else if (fields[i + j] < 0)
                         polynomials += " - ";
+
+                    //do Desmosa
                     //polynomials += Math.Round(Math.Abs(fields[i + j]), 15) + " x^" + (CSI.VARIABLES_IN_POLYNOMIAL - j - 1);
+
+                    // do Plotly
                     polynomials += Math.Round(Math.Abs(fields[i + j]), 15) + " * x**" + (CSI.VARIABLES_IN_POLYNOMIAL - j - 1);
                 }
 
