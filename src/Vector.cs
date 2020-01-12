@@ -72,7 +72,8 @@ namespace CubicSplineInterpolation
                         polynomials += " + ";
                     else
                         polynomials += " - ";
-                    polynomials += Math.Round(Math.Abs(fields[i + j]), 15) + " x^" + (CSI.VARIABLES_IN_POLYNOMIAL - j - 1);
+                    //polynomials += Math.Round(Math.Abs(fields[i + j]), 15) + " x^" + (CSI.VARIABLES_IN_POLYNOMIAL - j - 1);
+                    polynomials += Math.Round(Math.Abs(fields[i + j]), 15) + " * x**" + (CSI.VARIABLES_IN_POLYNOMIAL - j - 1);
                 }
 
                 polynomials += "\n";
