@@ -67,9 +67,14 @@ namespace CubicSplineInterpolation
             }
         }
 
-        public double getNorm
+        public double GetNorm()
         {
-
+            double sum = 0;
+            for (int i = 0; i < this.Length; i++)
+            {
+                sum += Math.Pow(this[i], 2);
+            }
+            return Math.Sqrt(sum);
         }
 
         public void SwapRows(int rowOne, int rowTwo)
