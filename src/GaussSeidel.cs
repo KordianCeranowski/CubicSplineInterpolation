@@ -43,16 +43,9 @@ namespace CubicSplineInterpolation
 
         private static double CountDifference(Vector current, Vector last)
         {
-            double sum = 0;
 
-            for (int i = 0; i < current.Length; i++)
-            {
-                sum += Math.Abs(current[i] - last[i]);
-            }
+            return (current - last).getNorm();
 
-            Console.WriteLine("Difference: " + sum);
-
-            return sum;
         }
     }
 }
