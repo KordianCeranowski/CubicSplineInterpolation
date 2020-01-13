@@ -30,7 +30,7 @@ namespace CubicSplineInterpolation
             InsertThirdConditionEquasions();
             InsertFourthConditionEquasions();
 
-            matrix.OrderRows(ref vector);
+            //matrix.OrderRows(ref vector);
         }
 
         public void RunGauss()

@@ -10,7 +10,7 @@ namespace CubicSplineInterpolation
         static void Main(string[] args)
         {
 
-            //new Test().TestJacobi();
+            //new Test().TestSiedel();
 
             Stopwatch timer = new Stopwatch();
 
@@ -30,6 +30,8 @@ namespace CubicSplineInterpolation
 
             timer.Start();
             CSI csi = new CSI(list);
+
+            Console.WriteLine(csi.matrix);
 
             //csi.RunGaussSeidel();
             csi.RunGauss();
