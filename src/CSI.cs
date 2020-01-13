@@ -40,12 +40,13 @@ namespace CubicSplineInterpolation
 
         public void RunGaussSeidel()
         {
-            GaussSeidel.GaussSeidelProcedure(matrix, vector);
+            GaussSeidel.Run(matrix, vector);
+            //GaussSeidel.GaussSeidelProcedure(matrix, vector);
         }
 
         public void RunJacobi()
         {
-            Console.WriteLine("todo");
+            Jacobi.JacobiProcedure(matrix, vector);
         }
 
         //do zrefaktorowania

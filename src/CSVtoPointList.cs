@@ -7,7 +7,6 @@ namespace CubicSplineInterpolation
 {
     class CSVtoPointList
     {
-
         public static List<Point> Run()
         {
             return Run(260);

@@ -107,12 +107,14 @@ namespace CubicSplineInterpolation
         // Paste output into https://www.desmos.com/calculator
         public string AsPolynomials()
         {
+            var PRINT_IN_PLOTLY = false;
+
             string polynomials = "";
 
             for (int i = 0; i < fields.Length; i += CSI.VARIABLES_IN_POLYNOMIAL)
             {
-                // do Plotly
-                polynomials += "y = ";
+                if(PRINT_IN_PLOTLY)
+                    polynomials += " y = ";
 
                 for (int j = 0; j < CSI.VARIABLES_IN_POLYNOMIAL; j++)
                 {
@@ -121,11 +123,10 @@ namespace CubicSplineInterpolation
                     else if (fields[i + j] < 0)
                         polynomials += " - ";
 
-                    //do Desmosa
-                    //polynomials += Math.Round(Math.Abs(fields[i + j]), 15) + " x^" + (CSI.VARIABLES_IN_POLYNOMIAL - j - 1);
-
-                    // do Plotly
-                    polynomials += Math.Round(Math.Abs(fields[i + j]), 15) + " * x**" + (CSI.VARIABLES_IN_POLYNOMIAL - j - 1);
+                    if (PRINT_IN_PLOTLY)
+                        polynomials += (Math.Abs(fields[i + j])).ToString("0." + new string('#', 20)) + " * x**" + (CSI.VARIABLES_IN_POLYNOMIAL - j - 1);
+                    else
+                        polynomials += (Math.Abs(fields[i + j])).ToString("0." + new string('#', 20)) + " x^" + (CSI.VARIABLES_IN_POLYNOMIAL - j - 1);
                 }
 
                 polynomials += "\n";
