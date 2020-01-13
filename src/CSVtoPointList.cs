@@ -9,7 +9,7 @@ namespace CubicSplineInterpolation
     {
         public static List<Point> Run()
         {
-            return Run(260);
+            return Run(21143478);
         }
         public static List<Point> Run(int targetSize)
         {
@@ -32,16 +32,16 @@ namespace CubicSplineInterpolation
                     }
                 }
             }
-            return points;
+            return TurnKilometersToMeters(points);
         }
 
-        public static List<Point> StretchDiagonaly(List<Point> points, double factor)
+        private static List<Point> TurnKilometersToMeters(List<Point> points)
         {
             var newPoints = new List<Point>();
 
             foreach (var point in points)
             {
-                newPoints.Add(new Point(point.x * factor, point.y));
+                newPoints.Add(new Point(point.x * 1000, point.y));
             }
 
             return newPoints;

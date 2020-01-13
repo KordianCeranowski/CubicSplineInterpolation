@@ -25,13 +25,10 @@ namespace CubicSplineInterpolation
                 new Point(8, 9)
             };
 
-            var test = CSVtoPointList.Run();
-            test = CSVtoPointList.StretchDiagonaly(test, 1000);
+            var googleMapsData = CSVtoPointList.Run(10);
 
             timer.Start();
-            CSI csi = new CSI(list);
-
-            Console.WriteLine(csi.matrix);
+            CSI csi = new CSI(googleMapsData);
 
             //csi.RunGaussSeidel();
             csi.RunGauss();
@@ -43,7 +40,7 @@ namespace CubicSplineInterpolation
 
             var seconds = timer.ElapsedMilliseconds / 1000;
 
-            Console.WriteLine("// " + test.Count + " -> " + seconds + "." + (timer.ElapsedMilliseconds - seconds * 1000) + " s");
+            Console.WriteLine("// " + googleMapsData.Count + " -> " + seconds + "." + (timer.ElapsedMilliseconds - seconds * 1000) + " s");
         }
     }
 }
