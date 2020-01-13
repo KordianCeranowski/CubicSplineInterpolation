@@ -8,12 +8,12 @@ namespace CubicSplineInterpolation
     {
         private static bool OUTPUT_ON = false;
 
-        public static void GaussianElimination(Matrix matrix, Vector vector, bool output)
+        public static Vector GaussianEliminationWithPercentMeter(Matrix matrix, Vector vector)
         {
-            OUTPUT_ON = output;
-            GaussianElimination(matrix, vector);
+            OUTPUT_ON = true;
+            return GaussianElimination(matrix, vector);
         }
-        public static void GaussianElimination(Matrix matrix, Vector vector)
+        public static Vector GaussianElimination(Matrix matrix, Vector vector)
         {
             if (vector.Length != matrix.size)
             {
@@ -50,7 +50,7 @@ namespace CubicSplineInterpolation
                 Console.Write("\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b");
             }
 
-            BackwardsOperation(matrix, vector);
+            return BackwardsOperation(matrix, vector);
 
         }
 
@@ -82,7 +82,7 @@ namespace CubicSplineInterpolation
             return rowOfMaxValue;
         }
 
-        private static void BackwardsOperation(Matrix matrix, Vector vector)
+        private static Vector BackwardsOperation(Matrix matrix, Vector vector)
         {
             double q; // mnożnik dla danego miejsca w wektorze, tj dla 3 pozycji w wektorze to będzie punkt [3,3] w macierzy
             double x; // wartość w danym miejscu w wektorze
@@ -100,6 +100,8 @@ namespace CubicSplineInterpolation
                 d = matrix[row, row];
                 vector[row] /= d;
             }
+
+            return vector;
         }
     }
 }

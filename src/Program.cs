@@ -9,6 +9,9 @@ namespace CubicSplineInterpolation
     {
         static void Main(string[] args)
         {
+
+            //new Test().TestJacobi();
+
             Stopwatch timer = new Stopwatch();
 
             List<Point> list = new List<Point>

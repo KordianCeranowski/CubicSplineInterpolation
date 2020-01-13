@@ -15,6 +15,13 @@ namespace CubicSplineInterpolation
             this.fields = new double[size];
             this.Length = size;
         }
+
+        public Vector(double[] array)
+        {
+            this.fields = array;
+            this.Length = fields.Length;
+        }
+
         public double this[int row]
         {
             get => GetValue(row);

@@ -6,7 +6,7 @@ namespace CubicSplineInterpolation
 {
     class Jacobi
     {
-        public static void JacobiProcedure(Matrix matrix, Vector vector)
+        public static Vector JacobiProcedure(Matrix matrix, Vector vector)
         {
             var lastVector = new Vector(vector.Length);
             var currentVector = new Vector(vector.Length);
@@ -37,7 +37,7 @@ namespace CubicSplineInterpolation
             }
             while (difference > 0.001);
 
-            vector.CopyValuesFrom(currentVector);
+            return currentVector;
 
         }
     }
