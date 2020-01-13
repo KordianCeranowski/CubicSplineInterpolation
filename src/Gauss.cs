@@ -6,8 +6,13 @@ namespace CubicSplineInterpolation
 {
     class Gauss
     {
-        private static readonly bool OUTPUT_ON = false;
+        private static bool OUTPUT_ON = false;
 
+        public static void GaussianElimination(Matrix matrix, Vector vector, bool output)
+        {
+            OUTPUT_ON = output;
+            GaussianElimination(matrix, vector);
+        }
         public static void GaussianElimination(Matrix matrix, Vector vector)
         {
             if (vector.Length != matrix.size)
@@ -40,7 +45,11 @@ namespace CubicSplineInterpolation
                 }
             }
 
-            Console.Write("\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b");
+            if (OUTPUT_ON)
+            {
+                Console.Write("\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b");
+            }
+
             BackwardsOperation(matrix, vector);
 
         }
