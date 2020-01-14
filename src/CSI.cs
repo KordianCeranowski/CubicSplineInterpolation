@@ -33,6 +33,11 @@ namespace CubicSplineInterpolation
             //matrix.OrderRows(ref vector);
         }
 
+        public void GenerateCSV(int intervals)
+        {
+            new GraphExporter(this, intervals);
+        }
+
         public void RunGauss()
         {
             vector = Gauss.GaussianElimination(matrix, vector);
