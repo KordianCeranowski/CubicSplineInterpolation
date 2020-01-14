@@ -40,7 +40,7 @@ namespace CubicSplineInterpolation
 
             csi.GetReport();
 
-            csi.GenerateCSV(100);
+            csi.GenerateCSV(169);
         }
     }
 }

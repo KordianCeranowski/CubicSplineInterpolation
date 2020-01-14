@@ -100,6 +100,53 @@ namespace CubicSplineInterpolation
             }
         }
 
+
+        // Mnożenie macierzy
+        public static Matrix operator *(Matrix left, Matrix right)
+        {
+            if (left.size != right.size)
+                throw new ArgumentException("Matrixes need to have same number of rows.");
+
+            Matrix matrix = new Matrix(left.size);
+
+            int multiplications = left.size;
+            double val;
+
+            for (int row = 0; row < matrix.size; row++)
+            {
+                for (int col = 0; col < matrix.size; col++)
+                {
+                    for (int i = 0; i < multiplications; i++)
+                    {
+                        val = left[row, i];
+                        val *= right[i, col];
+                        matrix[row, col] += val;
+                    }
+                }
+            }
+
+            return matrix;
+        }
+
+        public static Vector operator *(Matrix matrix, Vector vector)
+        {
+            Vector resultVector = new Vector(vector.Length);
+
+            for (int row = 0; row < vector.Length; row++)
+            {
+                resultVector[row] = 0;
+
+                for (int col = 0; col < matrix.size; col++)
+                {
+                    resultVector[row] += matrix[row, col] * vector[col];
+                }
+
+            }
+
+            return resultVector;
+        }
+
+
         // Porządkowanie rzędów aby na przekątnych nie było zer
         public void OrderRows(ref Vector vector)
         {

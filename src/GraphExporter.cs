@@ -11,14 +11,14 @@ namespace CubicSplineInterpolation
         private readonly List<Point> inputPoints;
         private readonly List<Polynomial> polynomials;
         private readonly int intervalsBetweenNewPoints;
-        private readonly List<Point> graphPoints;
+        private readonly List<Point> newPoints;
 
         public GraphExporter(CSI csi, int intervalsBetweenNewPoints)
         {
             this.inputPoints = csi.points;
             this.intervalsBetweenNewPoints = intervalsBetweenNewPoints;
             this.polynomials = csi.vector.ToPolynomials();
-            this.graphPoints = new List<Point>();
+            this.newPoints = new List<Point>();
 
             if (polynomials.Count != inputPoints.Count - 1)
             {
@@ -36,12 +36,12 @@ namespace CubicSplineInterpolation
             double interval = LengthOfInterval();
             double rangeStart = inputPoints[0].x;
 
-            for (int intervalCount = 1; intervalCount < intervalsBetweenNewPoints; intervalCount++)
+            for (int intervalCount = 0; intervalCount < intervalsBetweenNewPoints; intervalCount++)
             {
                 double x = rangeStart + interval * intervalCount;
                 double y = CountYinPoint(x);
                 Point point = new Point(x, y);
-                graphPoints.Add(point);
+                newPoints.Add(point);
             }
         }
 
@@ -86,7 +86,7 @@ namespace CubicSplineInterpolation
 
         private void WriteGraphToFile()
         {
-            string graphPointsCSV = PointsToCSV(graphPoints);
+            string graphPointsCSV = PointsToCSV(newPoints);
             System.IO.File.WriteAllText(path + "GraphPoints.csv", graphPointsCSV);
         }
 
