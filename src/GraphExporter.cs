@@ -10,13 +10,13 @@ namespace CubicSplineInterpolation
         private static readonly string path = @"..\..\..\output\";
         private readonly List<Point> inputPoints;
         private readonly List<Polynomial> polynomials;
-        private readonly int intervalsBetweenInputPoints;
+        private readonly int intervalsBetweenNewPoints;
         private readonly List<Point> graphPoints;
 
-        public GraphExporter(CSI csi, int intervalsBetweenInputPoints)
+        public GraphExporter(CSI csi, int intervalsBetweenNewPoints)
         {
             this.inputPoints = csi.points;
-            this.intervalsBetweenInputPoints = intervalsBetweenInputPoints;
+            this.intervalsBetweenNewPoints = intervalsBetweenNewPoints;
             this.polynomials = csi.vector.ToPolynomials();
             this.graphPoints = new List<Point>();
 
@@ -33,21 +33,10 @@ namespace CubicSplineInterpolation
 
         private void CreateGraph()
         {
-            for (int i = 0; i < polynomials.Count; i++)
-            {
-                graphPoints.Add(inputPoints[i]);
-                AddPointsFromPolynomial(i);
-            }
-            int lastPointIndex = inputPoints.Count - 1;
-            graphPoints.Add(inputPoints[lastPointIndex]);
-        }
+            double interval = LengthOfInterval();
+            double rangeStart = inputPoints[0].x;
 
-        private void AddPointsFromPolynomial(int numberOfPolynomial)
-        {
-            double interval = LengthOfIntervalOnPolynomial(numberOfPolynomial);
-            double rangeStart = inputPoints[numberOfPolynomial].x;
-
-            for (int intervalCount = 1; intervalCount < intervalsBetweenInputPoints; intervalCount++)
+            for (int intervalCount = 1; intervalCount < intervalsBetweenNewPoints; intervalCount++)
             {
                 double x = rangeStart + interval * intervalCount;
                 double y = CountYinPoint(x);
@@ -56,10 +45,10 @@ namespace CubicSplineInterpolation
             }
         }
 
-        private double LengthOfIntervalOnPolynomial(int numberOfPolynomial)
+        private double LengthOfInterval()
         {
-            double distanceBetweenPoints = inputPoints[numberOfPolynomial + 1].x - inputPoints[numberOfPolynomial].x;
-            return distanceBetweenPoints / intervalsBetweenInputPoints;
+            double distanceBetweenPoints = inputPoints[inputPoints.Count - 1].x - inputPoints[0].x;
+            return distanceBetweenPoints / intervalsBetweenNewPoints;
         }
 
         private double CountYinPoint(double x)
