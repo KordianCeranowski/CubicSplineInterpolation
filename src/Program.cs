@@ -18,29 +18,30 @@ namespace CubicSplineInterpolation
             new Point(8, 9)
         };
 
-        //todo
         static List<Point> criticalPoints = new List<Point>
         {
-            new Point(2,75),
+            new Point(2, 75),
             new Point(11, 9),
             new Point(54, -15),
-            new Point(98,272)
+            new Point(98, 272)
         };
 
         static List<Point> googleMapsData = CSVtoPointList.Run(0);
 
         static void Main(string[] args)
         {
-            CSI csi = new CSI(samplePoints);
+            new Test().TestGauss();
+
+            /*CSI csi = new CSI(samplePoints);*/
             //CSI csi = new CSI(criticalValues);
             //CSI csi = new CSI(googleMapsData);
 
             //csi.RunGaussSeidel();
-            csi.RunGauss();
+            /*            csi.RunGauss();
 
-            csi.GetReport();
+                        csi.GetReport();
 
-            csi.GenerateCSV(169);
+                        csi.GenerateCSV(169);*/
         }
     }
 }

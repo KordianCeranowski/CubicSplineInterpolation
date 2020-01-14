@@ -51,7 +51,7 @@ namespace CubicSplineInterpolation
 
         public void RunJacobi()
         {
-            vector = Jacobi.JacobiProcedure(matrix, vector);
+            new Jacobi(matrix, vector);
         }
 
         //do zrefaktorowania

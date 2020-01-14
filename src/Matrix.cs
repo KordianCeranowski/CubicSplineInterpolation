@@ -5,7 +5,7 @@ namespace CubicSplineInterpolation
 {
     public class Matrix
     {
-        private Dictionary<Tuple<int, int>, double> fields;
+        public Dictionary<Tuple<int, int>, double> fields;
         public readonly int size;
 
         public override string ToString()
