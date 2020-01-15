@@ -2,7 +2,7 @@
 
 namespace CubicSplineInterpolation
 {
-    class GaussSeidel
+    class Seidel
     {
         public static Vector GaussSeidelProcedure(Matrix matrix, Vector vector)
         {

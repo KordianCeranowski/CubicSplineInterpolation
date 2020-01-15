@@ -24,9 +24,9 @@ namespace CubicSplineInterpolation
         {
             var table = new double[9] 
             { 
-             1, -3, 4,
-             16, 6, 7,
-             -5, 10, 4
+              1, -3,  4,
+             16,  6,  7,
+             -5, 10,  4
             };
 
             for (int i = 0; i < 3; i++)
@@ -64,13 +64,10 @@ namespace CubicSplineInterpolation
 
         public void TestSiedel()
         {
-            Console.WriteLine(GaussSeidel.GaussSeidelProcedure(matrix, vector));
-            //Console.WriteLine(GaussSeidel.Run(matrix, vector));
         }
 
         public void TestJacobi()
         {
-            new Jacobi(matrix, vector);
         }
 
     }

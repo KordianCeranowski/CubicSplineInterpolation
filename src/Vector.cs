@@ -133,16 +133,6 @@ namespace CubicSplineInterpolation
 
             return polynomials;
         }
-        
-        public List<Polynomial> ToPolynomials()
-        {
-            var polynomials = new List<Polynomial>();
-            for (int i = 0; i < this.Length; i+=4)
-            {
-                polynomials.Add(new Polynomial(fields[i + 0], fields[i + 1], fields[i + 2], fields[i + 3]));
-            }
-            return polynomials;
-        }
 
         public Vector Clone()
         {

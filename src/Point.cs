@@ -19,10 +19,5 @@ namespace CubicSplineInterpolation
         {
             return $"({x}, {y})";
         }
-
-        public String ToStringForCSV()
-        {
-            return $"{x}{GraphExporter.SEPARATOR} {y}";
-        }
     }
 }

@@ -8,7 +8,6 @@ namespace CubicSplineInterpolation
         readonly public static int VARIABLES_IN_POLYNOMIAL = 4;
 
         readonly int countOfPolynomials;
-        readonly public List<Polynomial> polynomials;
 
         public List<Point> points;
         public Matrix matrix;
@@ -20,23 +19,19 @@ namespace CubicSplineInterpolation
             int n = points.Count;
 
             this.countOfPolynomials = n - 1;
-            this.polynomials = new List<Polynomial>();
 
             this.points = points;
 
             this.matrix = new Matrix(n);
             this.vector = new Vector(n);
             
-
             FillSystemOfEquasions();
 
             this.mVector = generateMfromGauss();
-
-            FillPolynomialsList();
         }
 
 
-        //sposób z wykładu
+        //
         private void FillSystemOfEquasions()
         {
             matrix[0, 0] = 2;
@@ -86,22 +81,6 @@ namespace CubicSplineInterpolation
 
 
 
-
-
-        private void FillPolynomialsList()
-        {
-            for (int i = 0; i < countOfPolynomials; i++)
-            {
-                Polynomial polynomial = GeneratePolynomial(i);
-                polynomials.Add(polynomial);
-            }
-        }
-
-        private Polynomial GeneratePolynomial(int j)
-        {
-            return new Polynomial(A(j), B(j), C(j), D(j));
-        }
-
         private double A(int j)
         {
             return Fx(j);
@@ -132,8 +111,6 @@ namespace CubicSplineInterpolation
             return mVector[j];
         }
 
-
-        
 
         public void Print(int howMany)
         {
@@ -177,16 +154,7 @@ namespace CubicSplineInterpolation
         // Paste output into https://www.desmos.com/calculator
         public void GetReport()
         {
-            foreach (var point in points)
-            {
-                Console.WriteLine(point);
-            }
-            Console.WriteLine(vector.AsPolynomials());
-        }
 
-        public void GenerateCSV(int intervals)
-        {
-            new GraphExporter(this, intervals);
         }
 
         private Vector generateMfromGauss()
