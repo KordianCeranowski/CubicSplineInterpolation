@@ -9,10 +9,10 @@ namespace CubicSplineInterpolation
 
         readonly int countOfPolynomials;
 
-        public List<Point> points;
-        public Matrix matrix;
-        public Vector vector;
-        public Vector mVector;
+        private List<Point> points;
+        private Matrix matrix;
+        private Vector vector;
+        private Vector mVector;
 
         public CSI(List<Point> points)
         {
@@ -27,11 +27,11 @@ namespace CubicSplineInterpolation
             
             FillSystemOfEquasions();
 
-            this.mVector = generateMfromGauss();
+            this.mVector = GenerateMfromGauss();
         }
 
 
-        //
+        #region Filling matrix
         private void FillSystemOfEquasions()
         {
             matrix[0, 0] = 2;
@@ -79,6 +79,63 @@ namespace CubicSplineInterpolation
             return points[j].x - points[j - 1].x;
         }
 
+        #endregion
+
+
+        #region Solving equasion system
+
+        public Vector GenerateMfromGauss()
+        {
+            return new Gauss(matrix, vector).Run();
+        }
+
+        public Vector GenerateMFromSiedel()
+        {
+            return new Seidel(matrix, vector).Run();
+        }
+
+        #endregion
+
+
+        #region Getting results
+
+        public void Print(int howMany)
+        {
+            var start = points[0].x;
+            var stop = points[points.Count - 1].x;
+            var jump = (stop - start) / howMany;
+            for (double x = start; x < stop; x += jump)
+            {
+                Console.WriteLine(new Point(x, S(x)));
+            }
+        }
+
+        private double S(double x)
+        {
+            int i = GetIndexX(x);
+
+            double diff = x - points[i].x;
+
+            double value = A(i) +
+                            B(i) * diff +
+                            C(i) * diff * diff +
+                            D(i) * diff * diff * diff;
+
+            return value;
+
+        }
+
+        private int GetIndexX(double x)
+        {
+            for (int i = 1; i < points.Count; i++)
+            {
+                if (x <= points[i].x)
+                {
+                    return i - 1;
+                }
+            }
+            throw new Exception("Podano wartość spoza oszacowanych wielomianów");
+        }
 
 
         private double A(int j)
@@ -111,56 +168,7 @@ namespace CubicSplineInterpolation
             return mVector[j];
         }
 
-
-        public void Print(int howMany)
-        {
-            var start = points[0].x;
-            var stop = points[points.Count - 1].x;
-            var jump = (stop - start) / howMany;
-            for (double x = start; x < stop; x += jump)
-            {
-                Console.WriteLine(new Point(x, S(x)));
-            }
-        }
-
-        private double S(double x)
-        {
-            int i = GetIndexX(x);
-
-            double diff = x - points[i].x;
-
-            double value =  A(i) +
-                            B(i) * diff +
-                            C(i) * diff * diff +
-                            D(i) * diff * diff * diff;
-
-            return value;
-
-        }
-
-        private int GetIndexX(double x)
-        {
-            for (int i = 1; i < points.Count; i++)
-            {
-                if (x <= points[i].x)
-                {
-                    return i - 1;
-                }
-            }
-            throw new Exception("Podano wartość spoza oszacowanych wielomianów");
-        }
-
-
-        // Paste output into https://www.desmos.com/calculator
-        public void GetReport()
-        {
-
-        }
-
-        private Vector generateMfromGauss()
-        {
-            return new Gauss(matrix, vector).Run();
-        }
+        #endregion
 
     }
 }

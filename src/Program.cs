@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-
 namespace CubicSplineInterpolation
 {
     class Program
@@ -37,16 +36,16 @@ namespace CubicSplineInterpolation
         {
             //new Test().TestGauss();
 
-            CSI csi = new CSI(pawla);
-
+            CSI csi = new CSI(samplePoints);
+            csi.GenerateMFromSiedel();
             csi.Print(100);
+
 
             //System.Console.WriteLine(csi.matrix);
             //System.Console.WriteLine(csi.vector);
 
             //csi.Print(1000);
 
-            System.Console.WriteLine();
             //csi.RunGauss();
         }
     }
