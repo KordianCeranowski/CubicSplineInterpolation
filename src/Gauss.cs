@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace CubicSplineInterpolation
 {
@@ -8,26 +6,32 @@ namespace CubicSplineInterpolation
     {
         private static bool OUTPUT_ON = false;
 
-        public static Vector GaussianEliminationWithPercentMeter(Matrix matrix, Vector vector)
-        {
-            OUTPUT_ON = true;
-            return GaussianElimination(matrix, vector);
-        }
-        public static Vector GaussianElimination(Matrix matrix, Vector vector)
+        private readonly Matrix matrix;
+        private readonly Vector vector;
+
+        public Gauss(Matrix matrix, Vector vector)
         {
             if (vector.Length != matrix.size)
             {
                 throw new System.Exception("Wprowadzono wektor o złym rozmiarze");
             }
 
+            this.matrix = matrix.Clone();
+            this.vector = vector.Clone();
+        }
+
+        public Vector RunWithPercentMeter()
+        {
+            OUTPUT_ON = true;
+            return Run();
+        }
+
+        public Vector Run()
+        {
             for (int i = 0; i < matrix.size; i++)
             {
-                if (OUTPUT_ON)
-                {
-                    Console.Write($"\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\bPostęp Gaussa: {Math.Round(i * 100d / matrix.size, 2)}%");
-                }
-                    
-                PartialChoice(matrix, i, i, vector);
+                PrintProgress(i);
+                PartialChoice(i, i);
 
                 for (int j = i + 1; j < matrix.size; j++)
                 {
@@ -45,24 +49,18 @@ namespace CubicSplineInterpolation
                 }
             }
 
-            if (OUTPUT_ON)
-            {
-                Console.Write("\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b");
-            }
-
-            return BackwardsOperation(matrix, vector);
-
+            return BackwardsOperation();
         }
 
-        private static void PartialChoice(Matrix matrix, int row, int column, Vector vector)
+        private void PartialChoice(int row, int column)
         {
-            int rowToSwapWith = FindMaxInRows(matrix, row, column);
+            int rowToSwapWith = FindMaxInRows(row, column);
 
             matrix.SwapRows(row, rowToSwapWith);
             vector.SwapRows(row, rowToSwapWith);
         }
 
-        private static int FindMaxInRows(Matrix matrix, int startRow, int column)
+        private int FindMaxInRows(int startRow, int column)
         {
             double maxValue = matrix[startRow, column];
             maxValue = Math.Abs(maxValue);
@@ -82,7 +80,7 @@ namespace CubicSplineInterpolation
             return rowOfMaxValue;
         }
 
-        private static Vector BackwardsOperation(Matrix matrix, Vector vector)
+        private Vector BackwardsOperation()
         {
             double q; // mnożnik dla danego miejsca w wektorze, tj dla 3 pozycji w wektorze to będzie punkt [3,3] w macierzy
             double x; // wartość w danym miejscu w wektorze
@@ -102,6 +100,14 @@ namespace CubicSplineInterpolation
             }
 
             return vector;
+        }
+
+        private void PrintProgress(int iteration)
+        {
+            if (OUTPUT_ON)
+            {
+                Console.Write($"\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\bPostęp Gaussa: {Math.Round(iteration * 100d / matrix.size, 2)}%");
+            }
         }
     }
 }

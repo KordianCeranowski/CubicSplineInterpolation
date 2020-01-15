@@ -55,10 +55,10 @@ namespace CubicSplineInterpolation
         {
             int indexOfPolynomial = WhichPolynomialDescribes(x);
             double Y = 0;
-            Y += polynomials[indexOfPolynomial].A * Math.Pow(x, 3);
-            Y += polynomials[indexOfPolynomial].B * Math.Pow(x, 2);
-            Y += polynomials[indexOfPolynomial].C * Math.Pow(x, 1);
-            Y += polynomials[indexOfPolynomial].D * Math.Pow(x, 0);
+            Y += polynomials[indexOfPolynomial].A * Math.Pow(x, 0);
+            Y += polynomials[indexOfPolynomial].B * Math.Pow(x, 1);
+            Y += polynomials[indexOfPolynomial].C * Math.Pow(x, 2);
+            Y += polynomials[indexOfPolynomial].D * Math.Pow(x, 3);
             return Y;
         }
 

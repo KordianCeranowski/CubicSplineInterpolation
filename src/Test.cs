@@ -11,6 +11,10 @@ namespace CubicSplineInterpolation
 
         public Test()
         {
+        }
+
+        public void SetUp()
+        {
             this.matrix = new Matrix(3);
             FillMatrix();
             this.vector = new Vector(new double[3] { 23, 134, 19 });
@@ -20,9 +24,9 @@ namespace CubicSplineInterpolation
         {
             var table = new double[9] 
             { 
-             50, -3, 4,
-             16, 50, 7,
-             -5, 10, 50
+             1, -3, 4,
+             16, 6, 7,
+             -5, 10, 4
             };
 
             for (int i = 0; i < 3; i++)
@@ -52,7 +56,10 @@ namespace CubicSplineInterpolation
 
         public void TestGauss()
         {
-            Console.WriteLine(Gauss.GaussianElimination(matrix, vector));
+            SetUp();
+            Gauss gauss = new Gauss(matrix, vector);
+            var newVector = gauss.Run();
+            Console.WriteLine(newVector);
         }
 
         public void TestSiedel()

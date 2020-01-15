@@ -114,15 +114,10 @@ namespace CubicSplineInterpolation
         // Paste output into https://www.desmos.com/calculator
         public string AsPolynomials()
         {
-            var PRINT_IN_PLOTLY = false;
-
             string polynomials = "";
 
             for (int i = 0; i < fields.Length; i += CSI.VARIABLES_IN_POLYNOMIAL)
             {
-                if(PRINT_IN_PLOTLY)
-                    polynomials += " y = ";
-
                 for (int j = 0; j < CSI.VARIABLES_IN_POLYNOMIAL; j++)
                 {
                     if (fields[i + j] >= 0 && j != 0)
@@ -130,14 +125,10 @@ namespace CubicSplineInterpolation
                     else if (fields[i + j] < 0)
                         polynomials += " - ";
 
-                    if (PRINT_IN_PLOTLY)
-                        polynomials += (Math.Abs(fields[i + j])).ToString("0." + new string('#', 20)) + " * x**" + (CSI.VARIABLES_IN_POLYNOMIAL - j - 1);
-                    else
-                        polynomials += (Math.Abs(fields[i + j])).ToString("0." + new string('#', 20)) + " x^" + (CSI.VARIABLES_IN_POLYNOMIAL - j - 1);
+                    polynomials += (Math.Abs(fields[i + j])).ToString("0." + new string('#', 20)) + " x^" + (CSI.VARIABLES_IN_POLYNOMIAL - j - 1);
                 }
 
                 polynomials += "\n";
-
             }
 
             return polynomials;
@@ -151,6 +142,16 @@ namespace CubicSplineInterpolation
                 polynomials.Add(new Polynomial(fields[i + 0], fields[i + 1], fields[i + 2], fields[i + 3]));
             }
             return polynomials;
+        }
+
+        public Vector Clone()
+        {
+            Vector clone = new Vector(Length);
+            for (int i = 0; i < Length; i++)
+            {
+                clone[i] = this[i];
+            }
+            return clone;
         }
 
     }
