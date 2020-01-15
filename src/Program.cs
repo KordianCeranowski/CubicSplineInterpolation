@@ -14,14 +14,6 @@ namespace CubicSplineInterpolation
             new Point(8, 9)
         };
 
-        static List<Point> pawla = new List<Point>
-        {
-            new Point(0, 0),
-            new Point(1, 0.5),
-            new Point(2, 2),
-            new Point(3, 1.5)
-        };
-
         static List<Point> criticalPoints = new List<Point>
         {
             new Point(2, 75),
@@ -30,23 +22,13 @@ namespace CubicSplineInterpolation
             new Point(98, 272)
         };
 
-        static List<Point> googleMapsData = CSVtoPointList.Run(0);
+        static List<Point> googleMapsData = CSVtoPointList.Run();
 
         static void Main(string[] args)
         {
-            //new Test().TestGauss();
-
             CSI csi = new CSI(samplePoints);
-            csi.GenerateMFromSiedel();
+            csi.GenerateMFromSeidel();
             csi.Print(100);
-
-
-            //System.Console.WriteLine(csi.matrix);
-            //System.Console.WriteLine(csi.vector);
-
-            //csi.Print(1000);
-
-            //csi.RunGauss();
         }
     }
 }

@@ -63,8 +63,7 @@ namespace CubicSplineInterpolation
             return c;
         }
 
-        public static Vector operator -(Vector a, Vector b)
-        => a + (-b);
+        public static Vector operator -(Vector a, Vector b) => a + (-b);
 
         public void Abs()
         {
@@ -111,29 +110,6 @@ namespace CubicSplineInterpolation
             return vectorString;
         }
 
-        // Paste output into https://www.desmos.com/calculator
-        public string AsPolynomials()
-        {
-            string polynomials = "";
-
-            for (int i = 0; i < fields.Length; i += CSI.VARIABLES_IN_POLYNOMIAL)
-            {
-                for (int j = 0; j < CSI.VARIABLES_IN_POLYNOMIAL; j++)
-                {
-                    if (fields[i + j] >= 0 && j != 0)
-                        polynomials += " + ";
-                    else if (fields[i + j] < 0)
-                        polynomials += " - ";
-
-                    polynomials += (Math.Abs(fields[i + j])).ToString("0." + new string('#', 20)) + " x^" + (CSI.VARIABLES_IN_POLYNOMIAL - j - 1);
-                }
-
-                polynomials += "\n";
-            }
-
-            return polynomials;
-        }
-
         public Vector Clone()
         {
             Vector clone = new Vector(Length);
@@ -143,6 +119,5 @@ namespace CubicSplineInterpolation
             }
             return clone;
         }
-
     }
 }

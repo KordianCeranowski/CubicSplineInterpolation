@@ -7,8 +7,6 @@ namespace CubicSplineInterpolation
     {
         readonly public static int VARIABLES_IN_POLYNOMIAL = 4;
 
-        readonly int countOfPolynomials;
-
         private List<Point> points;
         private Matrix matrix;
         private Vector vector;
@@ -16,18 +14,14 @@ namespace CubicSplineInterpolation
 
         public CSI(List<Point> points)
         {
-            int n = points.Count;
-
-            this.countOfPolynomials = n - 1;
-
             this.points = points;
 
-            this.matrix = new Matrix(n);
-            this.vector = new Vector(n);
+            this.matrix = new Matrix(points.Count);
+            this.vector = new Vector(points.Count);
             
             FillSystemOfEquasions();
 
-            this.mVector = GenerateMfromGauss();
+            //this.mVector = GenerateMfromGauss();
         }
 
 
@@ -84,14 +78,19 @@ namespace CubicSplineInterpolation
 
         #region Solving equasion system
 
-        public Vector GenerateMfromGauss()
+        public void GenerateMfromGauss()
         {
-            return new Gauss(matrix, vector).Run();
+            this.mVector = new Gauss(matrix, vector).Run();
         }
 
-        public Vector GenerateMFromSiedel()
+        public void GenerateMFromSeidel()
         {
-            return new Seidel(matrix, vector).Run();
+            this.mVector = new Seidel(matrix, vector).Run();
+        }
+
+        public void GenerateMFromJacobi()
+        {
+            this.mVector = new Jacobi(matrix, vector).Run();
         }
 
         #endregion
@@ -169,6 +168,5 @@ namespace CubicSplineInterpolation
         }
 
         #endregion
-
     }
 }

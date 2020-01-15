@@ -46,6 +46,5 @@ namespace CubicSplineInterpolation
 
             return newPoints;
         }
-
     }
 }

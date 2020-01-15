@@ -10,8 +10,8 @@ namespace CubicSplineInterpolation
 
         public Seidel(Matrix matrix, Vector vector)
         {
-            this.matrix = matrix;
-            this.vector = vector;
+            this.matrix = matrix.Clone();
+            this.vector = vector.Clone();
         }
 
         public Vector Run()
@@ -23,7 +23,6 @@ namespace CubicSplineInterpolation
 
             do
             {
-                Console.WriteLine(currentVector);
                 for (int row = 0; row < matrix.size; row++)
                 {
                     double sum = 0;
@@ -46,7 +45,6 @@ namespace CubicSplineInterpolation
             while (difference > DIFFERENCE);
 
             return currentVector;
-
         }
     }
 }

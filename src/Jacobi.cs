@@ -6,69 +6,17 @@ namespace CubicSplineInterpolation
 {
     class Jacobi
     {
-        Matrix A;
-        Vector B;
-        Vector X;
-        Vector oldX;
+        private readonly double DIFFERENCE = 0.001;
+        private readonly Matrix matrix;
+        private readonly Vector vector;
 
-        Matrix LplusU;
-        Matrix DtoMinus1;
-        Matrix Tj;
-        Vector Fj;
-
-        public Jacobi(Matrix A, Vector B)
+        public Jacobi(Matrix matrix, Vector vector)
         {
-            this.A = A;
-            this.B = B;
-
-            this.X = new Vector(this.B.Length);
-            this.oldX = new Vector(this.B.Length);
-
-            this.DtoMinus1 = new Matrix(A.size);
-            FillDtoMinus1();
-            this.LplusU = new Matrix(A.size);
-            FillLplusU();
-
-            this.Tj = DtoMinus1 * LplusU;
-
-            this.Fj = DtoMinus1 * B;
-
-            Run();
+            this.matrix = matrix.Clone();
+            this.vector = vector.Clone();
         }
 
-        private void FillDtoMinus1()
-        {
-            for (int i = 0; i < A.size; i++)
-            {
-                DtoMinus1[i, i] = 1d / A[i, i];
-            }
-        }
-
-        private void FillLplusU()
-        {
-            foreach (var kvp in A.fields)
-            {
-                if (kvp.Key.Item1 != kvp.Key.Item2)
-                {
-                    LplusU.fields.Add(kvp.Key, kvp.Value);
-                }
-            }
-        }
-
-        private void Run()
-        {
-            int iterations = 10;
-            for (int i = 0; i < iterations; i++)
-            {
-                X = Tj * oldX + Fj;
-                oldX = X;
-                Console.WriteLine(X);
-            }
-        }
-
-
-
-        public static Vector JacobiProcedure(Matrix matrix, Vector vector)
+        public Vector Run()
         {
             var lastVector = new Vector(vector.Length);
             var currentVector = new Vector(vector.Length);
@@ -77,7 +25,6 @@ namespace CubicSplineInterpolation
 
             do
             {
-                Console.WriteLine(currentVector);
                 for (int row = 0; row < matrix.size; row++)
                 {
                     double sum = 0;
@@ -97,10 +44,9 @@ namespace CubicSplineInterpolation
                 difference = (currentVector - lastVector).GetNorm();
                 lastVector.CopyValuesFrom(currentVector);
             }
-            while (difference > 0.001);
+            while (difference > DIFFERENCE);
 
             return currentVector;
-
         }
     }
 }

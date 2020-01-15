@@ -100,8 +100,6 @@ namespace CubicSplineInterpolation
             }
         }
 
-
-        // Mnożenie macierzy
         public static Matrix operator *(Matrix left, Matrix right)
         {
             if (left.size != right.size)
@@ -146,8 +144,6 @@ namespace CubicSplineInterpolation
             return resultVector;
         }
 
-
-        // Does not swap zeroes
         public void SwapRows(int rowOne, int rowTwo)
         {
             for (int col = 0; col < size; col++)
