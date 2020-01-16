@@ -32,16 +32,28 @@ namespace CubicSplineInterpolation
                     }
                 }
             }
-            return TurnKilometersToMeters(points);
+            return ToKilometers(points);
         }
 
-        private static List<Point> TurnKilometersToMeters(List<Point> points)
+        private static List<Point> ToMeters(List<Point> points)
         {
             var newPoints = new List<Point>();
 
             foreach (var point in points)
             {
                 newPoints.Add(new Point(point.x * 1000, point.y));
+            }
+
+            return newPoints;
+        }
+
+        private static List<Point> ToKilometers(List<Point> points)
+        {
+            var newPoints = new List<Point>();
+
+            foreach (var point in points)
+            {
+                newPoints.Add(new Point(point.x, point.y / 1000));
             }
 
             return newPoints;

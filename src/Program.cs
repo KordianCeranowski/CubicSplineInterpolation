@@ -26,9 +26,9 @@ namespace CubicSplineInterpolation
 
         static void Main(string[] args)
         {
-            CSI csi = new CSI(samplePoints);
+            CSI csi = new CSI(googleMapsData);
             csi.GenerateMFromSeidel();
-            csi.Print(100);
+            csi.Print(1000);
         }
     }
 }
