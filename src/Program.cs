@@ -1,34 +1,34 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+
 namespace CubicSplineInterpolation
 {
     class Program
     {
-        static List<Point> samplePoints = new List<Point>
+        public static List<Point> generateFakePoints(int howMany)
         {
-            new Point(1, 2),
-            new Point(2, 3),
-            new Point(3, 5),
-            new Point(4, 1),
-            new Point(5, 6),
-            new Point(7, 4),
-            new Point(8, 9)
-        };
+            var points = new List<Point>();
+            for (int i = 0; i < howMany; i++)
+            {
+                var x = i * 0.118;
+                var y = 3 * x * x * x * x - x*x*x -x*x + x + 3;
+                points.Add(new Point(x, y));
+            }
+            return points;
+        }
 
-        static List<Point> criticalPoints = new List<Point>
-        {
-            new Point(2, 75),
-            new Point(11, 9),
-            new Point(54, -15),
-            new Point(98, 272)
-        };
-
-        static List<Point> googleMapsData = CSVtoPointList.Run();
+        static List<Point> googleMapsData = CSVtoPointList.Run(8);
+        static List<Point> fake = generateFakePoints(50);
 
         static void Main(string[] args)
         {
-            CSI csi = new CSI(googleMapsData);
-            csi.GenerateMFromSeidel();
-            csi.Print(1000);
+
+            var s = Stopwatch.StartNew();
+            CSI csi = new CSI(fake);
+            csi.GenerateMfromSeidel();
+            csi.GenerateMfromJacobi();
+            Console.WriteLine(s.Elapsed);
         }
     }
 }

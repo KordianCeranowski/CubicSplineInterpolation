@@ -15,7 +15,7 @@ namespace CubicSplineInterpolation
         {
             var points = new List<Point>();
 
-            using (var reader = new StreamReader(@"..\..\..\google API\data.csv"))
+            using (var reader = new StreamReader(@"..\..\..\google API\512.txt"))
             {
                 int counter = 0;
                 while (!reader.EndOfStream)
@@ -32,7 +32,7 @@ namespace CubicSplineInterpolation
                     }
                 }
             }
-            return ToKilometers(points);
+            return ToMeters(points);
         }
 
         private static List<Point> ToMeters(List<Point> points)

@@ -44,7 +44,7 @@ function plotElevation(elevations, status) {
   data.addColumn('string', 'Sample');
   data.addColumn('number', 'Elevation');
   
-  var pyszne = document.getElementById('moje_dane_mniam');
+  var dane = document.getElementById('moje_dane');
   
   var lastLat = elevations[0].location.lat();
   var lastLng = elevations[0].location.lng();
@@ -53,7 +53,7 @@ function plotElevation(elevations, status) {
   
   var KM_IN_DEGREE = 111.32;
   
-  pyszne.innerHTML += 'total_distance_in_km, elevation<br/>'
+  dane.innerHTML += 'total_distance_in_km, elevation<br/>'
   for (var i = 0; i < elevations.length; i++) {
 
 		var currLat = elevations[i].location.lat();

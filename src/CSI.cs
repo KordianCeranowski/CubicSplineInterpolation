@@ -83,12 +83,12 @@ namespace CubicSplineInterpolation
             this.mVector = new Gauss(matrix, vector).Run();
         }
 
-        public void GenerateMFromSeidel()
+        public void GenerateMfromSeidel()
         {
             this.mVector = new Seidel(matrix, vector).Run();
         }
 
-        public void GenerateMFromJacobi()
+        public void GenerateMfromJacobi()
         {
             this.mVector = new Jacobi(matrix, vector).Run();
         }
@@ -109,7 +109,7 @@ namespace CubicSplineInterpolation
             }
         }
 
-        private double S(double x)
+        public double S(double x)
         {
             int i = GetIndexX(x);
 
@@ -165,6 +165,11 @@ namespace CubicSplineInterpolation
         private double M(int j)
         {
             return mVector[j];
+        }
+
+        public void PrintPolynomial(int j)
+        {
+            Console.WriteLine($"{D(j)}x^3 + {C(j)}x^2 + {B(j)}x + {A(j)}");
         }
 
         #endregion

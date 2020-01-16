@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace CubicSplineInterpolation
 {
@@ -22,11 +20,12 @@ namespace CubicSplineInterpolation
             var currentVector = new Vector(vector.Length);
 
             double difference;
-
+            var temp = 0;
             do
             {
                 for (int row = 0; row < matrix.size; row++)
                 {
+                    
                     double sum = 0;
                     sum += vector[row];
 
@@ -40,12 +39,12 @@ namespace CubicSplineInterpolation
 
                     currentVector[row] = sum / matrix[row, row];
                 }
-
+                temp++;
                 difference = (currentVector - lastVector).GetNorm();
                 lastVector.CopyValuesFrom(currentVector);
             }
             while (difference > DIFFERENCE);
-
+            Console.WriteLine(temp);
             return currentVector;
         }
     }

@@ -20,6 +20,7 @@ namespace CubicSplineInterpolation
             var currentVector = new Vector(vector.Length);
 
             double difference;
+            int temp = 0;
 
             do
             {
@@ -35,15 +36,15 @@ namespace CubicSplineInterpolation
                             sum -= matrix[row, col] * currentVector[col];
                         }
                     }
-
                     currentVector[row] = sum / matrix[row, row];
                 }
 
                 difference = (currentVector - lastVector).GetNorm();
                 lastVector.CopyValuesFrom(currentVector);
+                temp++;
             }
             while (difference > DIFFERENCE);
-
+            Console.WriteLine(temp);
             return currentVector;
         }
     }
